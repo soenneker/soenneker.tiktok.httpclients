@@ -29,7 +29,7 @@ public sealed class TikTokOpenApiHttpClient : ITikTokOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(TikTokOpenApiHttpClient), (config: _config, baseUrl: _config["TikTok:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("TikTok:AccessToken");
+            var apiKey = state.config.GetStringStrict("TikTok:AccessToken");
             string authHeaderName = state.config["TikTok:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["TikTok:AuthHeaderValueTemplate"] ?? "Bearer {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
